@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8" />
+   <meta name="author" content="Germán A. Ramírez" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Understanding JS</title>
+
+   <script type="text/javascript" language="javascript">
+      username = prompt("Introduzca su Nombre");
+      message = "Hola, " + username + ". Su nombre tiene ";
+      nameLen = username.length;
+
+      if (nameLen > 5)
+         message = message + "mas de ";
+      else if (nameLen < 5)
+         message = message + "menos de ";
+      else
+         message = message + "exactamente ";
+
+      message = message + "5 caracteres.";
+      alert(message);
+   </script>
+</head>
+<body>
+
+</body>
+</html>
