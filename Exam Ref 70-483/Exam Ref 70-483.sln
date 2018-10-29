@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C1 - Manage program flow", "C1 - Manage program flow", "{E9FAA486-056A-48CD-A3C0-F098BE4BA3AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1 - UsingThreadClass", "1 - UsingThreadClass\1 - UsingThreadClass.csproj", "{D713D49C-B815-470F-A88A-DCFBF93C408B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D713D49C-B815-470F-A88A-DCFBF93C408B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D713D49C-B815-470F-A88A-DCFBF93C408B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D713D49C-B815-470F-A88A-DCFBF93C408B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D713D49C-B815-470F-A88A-DCFBF93C408B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D713D49C-B815-470F-A88A-DCFBF93C408B} = {E9FAA486-056A-48CD-A3C0-F098BE4BA3AF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEE9D25E-4F54-426C-BA52-C80C4A00FE94}
+	EndGlobalSection
+EndGlobal
