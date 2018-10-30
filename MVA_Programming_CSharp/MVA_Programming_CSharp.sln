@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammaticFlow", "Program
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkingWithStrings", "WorkingWithStrings\WorkingWithStrings.csproj", "{0F49919F-4BEB-4399-9850-1AD7860EFA53}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C4", "C4", "{C2559B5C-4541-4E1F-9A86-6E891E1AA908}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeReflectionAndGC", "CodeReflectionAndGC\CodeReflectionAndGC.csproj", "{BC6566E4-480D-45D9-9A37-CB667F1E1E7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,10 @@ Global
 		{0F49919F-4BEB-4399-9850-1AD7860EFA53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F49919F-4BEB-4399-9850-1AD7860EFA53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F49919F-4BEB-4399-9850-1AD7860EFA53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC6566E4-480D-45D9-9A37-CB667F1E1E7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC6566E4-480D-45D9-9A37-CB667F1E1E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC6566E4-480D-45D9-9A37-CB667F1E1E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC6566E4-480D-45D9-9A37-CB667F1E1E7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +47,7 @@ Global
 		{73F3EC28-F270-400F-8C87-1023F66AAF07} = {931E9837-E2CF-4281-B348-A7393C3D6FDE}
 		{01B2DDCA-9984-449E-89B8-3B5B69042A70} = {0DF6820B-43B4-49D2-BED5-953D00214EC7}
 		{0F49919F-4BEB-4399-9850-1AD7860EFA53} = {0DF6820B-43B4-49D2-BED5-953D00214EC7}
+		{BC6566E4-480D-45D9-9A37-CB667F1E1E7A} = {C2559B5C-4541-4E1F-9A86-6E891E1AA908}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC87A541-8C53-489E-9B0A-3D63E62F6E42}
