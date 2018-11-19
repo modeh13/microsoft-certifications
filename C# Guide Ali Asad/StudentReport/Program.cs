@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace StudentReport
 {
@@ -50,14 +46,14 @@ namespace StudentReport
          string reportTitle = "Report Card";
          reportTitle = reportTitle.PadBoth('*', 50);
 
-         
+         studentsData.Sort2DArrayByColumn(studentsData.GetLength(1) - 1, false);         
 
          Console.WriteLine(reportTitle);
 
          for (int i = 0; i < studentsData.GetLength(0); i++)
          {
             Console.WriteLine(new string('*', 50));
-            Console.WriteLine("Student Name: {0}, Position {1}, Total: {2:N2}/{3}", studentsData[i, 0], i + 1, studentsData[i, studentsData.GetLength(1) - 1], subjects.Length * 100);
+            Console.WriteLine("Student Name: {0}, Position {1}, Total: {2:N2}/{3}", studentsData[i, 0], i + 1, Convert.ToDouble(studentsData[i, studentsData.GetLength(1) - 1]), subjects.Length * 100);
             Console.WriteLine(new string('*', 50));
          }
 
@@ -144,6 +140,128 @@ namespace StudentReport
          }
 
          return text;
+      }
+
+      /// <summary>
+      /// Sort the 2D array base on numeric column.
+      /// </summary>
+      /// <param name="data">2D array to sort</param>
+      /// <param name="columnIndex">Index of the column to take as reference for the sorting criterion</param>
+      /// <param name="ascending">Ascending or Descending</param>
+      /// <returns>2D array sorted by column</returns>
+      public static string[,] Sort2DArrayByColumn(this string[,] data, int columnIndex, bool ascending = true)
+      {
+         return QuickSort2DArray(data, columnIndex, 0, data.GetLength(0) - 1, ascending);
+      }
+
+      /// <summary>
+      /// Quick algorithm to sort a 2D array based on numeric column.
+      /// </summary>
+      /// <param name="data">2D array to sort</param>
+      /// <param name="columnIndex">Index of the column to take as reference for the sorting criterion</param>
+      /// <param name="left">Top threshold</param>
+      /// <param name="right">Bottom threshold</param>
+      /// <param name="ascending">Ascending or Descending</param>
+      /// <returns></returns>
+      private static string[,] QuickSort2DArray(string[,] data, int columnIndex, int left, int right, bool ascending)
+      {
+         if (right > left)
+         {
+            //Case Recursive
+            int pivotIndex = left + (right - left) / 2;
+            pivotIndex = GetNewPivote(data, columnIndex, left, right, pivotIndex, ascending);
+            QuickSort2DArray(data, columnIndex, left, pivotIndex - 1, ascending);
+            QuickSort2DArray(data, columnIndex, pivotIndex + 1, right, ascending);
+         }
+
+         //Case Base
+         return data;
+      }
+
+      /// <summary>
+      /// Get the data array for the row in a 2D array based on index.
+      /// </summary>
+      /// <param name="data">2D array with the data</param>
+      /// <param name="rowIndex">Row index</param>
+      /// <returns>Single array with the data belonging to row</returns>
+      private static string[] GetRow2DArray(string[,] data, int rowIndex)
+      {
+         string[] row = new string[data.GetLength(1)];
+
+         for (int i = 0; i < row.Length; i++)
+         {
+            row[i] = data[rowIndex, i];
+         }
+
+         return row;
+      }
+
+      /// <summary>
+      /// Set the data values for the row in a 2D array based on index.
+      /// </summary>
+      /// <param name="data">2D array with the data</param>
+      /// <param name="rowIndex">Row index</param>
+      /// <param name="row">Data row with values to set</param>
+      private static void SetRow2DArray(string[,] data, int rowIndex, string[] row)
+      {
+         for (int i = 0; i < data.GetLength(1); i++)
+         {
+            data[rowIndex, i] = row[i];
+         }
+      }
+
+      /// <summary>
+      /// Get the new pivot position for the current iteration in the QuickSort algorithm.
+      /// </summary>
+      /// <param name="data">2D array to sort</param>
+      /// <param name="columnIndex">Index of the column to take as reference for the sorting criterion</param>
+      /// <param name="left">Top threshold</param>
+      /// <param name="right">Bottom threshold</param>
+      /// <param name="pivotIndex">Pivot index</param>
+      /// <param name="ascending">Ascending or Descending</param>
+      /// <returns></returns>
+      private static int GetNewPivote(string[,] data, int columnIndex, int left, int right, int pivotIndex, bool ascending)
+      {
+         string[] pivoteRow = GetRow2DArray(data, pivotIndex);
+
+         //Move pivote to end position
+         string[] rightValue = GetRow2DArray(data, right);
+         SetRow2DArray(data, right, pivoteRow);
+         SetRow2DArray(data, pivotIndex, rightValue);
+
+         //newPivot storages the index for the first more bigger value than PIVOT
+         int newPivot = left;
+         string[] tempValue;
+
+         for (int i = left; i < right; i++)
+         {
+            if (!ascending)
+            {
+               if (double.Parse(data[i, columnIndex]) >= double.Parse(pivoteRow[columnIndex]))
+               {
+                  tempValue = GetRow2DArray(data, newPivot);
+                  SetRow2DArray(data, newPivot, GetRow2DArray(data, i));
+                  SetRow2DArray(data, i, tempValue);
+                  newPivot++;
+               }
+            }
+            else
+            {
+               if (double.Parse(data[i, columnIndex]) <= double.Parse(pivoteRow[columnIndex]))
+               {
+                  tempValue = GetRow2DArray(data, newPivot);
+                  SetRow2DArray(data, newPivot, GetRow2DArray(data, i));
+                  SetRow2DArray(data, i, tempValue);
+                  newPivot++;
+               }
+            }
+         }
+
+         tempValue = GetRow2DArray(data, right);
+         rightValue = GetRow2DArray(data, newPivot);
+         SetRow2DArray(data, newPivot, tempValue);
+
+         return newPivot;
       }
    }
 }
