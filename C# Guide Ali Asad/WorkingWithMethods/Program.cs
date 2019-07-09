@@ -14,6 +14,7 @@
          int fourth = SumOptional(10, 20);
 
          //Passing a parameter as Reference with "ref" keyword.
+         //We are telling to the Program, please use "memory address" and update its value instead of use the value directly.
          int i = 10;
          PassByRef(ref i);
 
