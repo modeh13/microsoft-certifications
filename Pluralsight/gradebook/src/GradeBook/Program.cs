@@ -25,8 +25,8 @@ namespace GradeBook
             Console.WriteLine(TITLE);
             Console.WriteLine(new string('-', 50));
             
-            string userBookType = GetUserInput("Please select a book type (0: InMemory, 1: InDisk):", "0", "1");
-            string gradeBookName = GetUserInput("Please enter a name for the GradBook:", typeof(string));
+            string userBookType = GetUserInput("Please select a book type (0: InMemory, 1: InDisk):", new UserInputCriteria { Values = new []{ "0", "1" }});
+            string gradeBookName = GetUserInput("Please enter a name for the GradBook:", new UserInputCriteria { DataType = typeof(string) });
 
             switch(userBookType)
             {
@@ -40,44 +40,52 @@ namespace GradeBook
                     break;
             }
 
-            string userInput = GetUserInput("Enter a grade:", typeof(double), "q") as string;
-            while(!userBookType.ToLowerInvariant().Equals(OUT_COMMAND))
-            {
-                _book.AddGrade(double.Parse(userInput));
-                userInput = GetUserInput("Enter a grade:", typeof(double), "q") as string;
-            }
+            // Entry user input
+            string userInput = string.Empty;
+            Func<string, bool> isValidGrade = input => !input.ToLowerInvariant().Equals(OUT_COMMAND);
 
-            Console.ReadKey();            
+            do
+            {
+                userInput = GetUserInput("Enter a grade:", new UserInputCriteria { DataType = typeof(double), Values = new []{ OUT_COMMAND } });
+
+                if(isValidGrade(userInput))
+                {
+                    _book.AddGrade(double.Parse(userInput));
+                }
+            } while(isValidGrade(userInput));
+
+            // Show statistics
+            var statistics = _book.GetStatistics();
+            Console.WriteLine(string.Empty);
+            Console.WriteLine($"GradeBook : {_book.Name} - Statistics.");
+            Console.WriteLine($"{nameof(statistics.Average)}: {statistics.Average:N2}.");
+            Console.WriteLine($"{nameof(statistics.High)}: {statistics.High:N2}.");
+            Console.WriteLine($"{nameof(statistics.Low)}: {statistics.Low:N2}.");
+            Console.WriteLine($"{nameof(statistics.Letter)}: {statistics.Letter}.");
         }
 
-        static string GetUserInput(string message, params string[] allowedValues)
+        static string GetUserInput(string message, UserInputCriteria userInputCriteria)
         {
+            bool isValid = false;
             string userInput = string.Empty;
 
-            while(Array.IndexOf(allowedValues, userInput) == -1) 
+            do 
             {
                 Console.WriteLine(message);
                 userInput = Console.ReadLine();
-            }
 
-            return userInput;
-        }
+                if(userInputCriteria.DataType != null)
+                {
+                    TypeConverter converter = TypeDescriptor.GetConverter(userInputCriteria.DataType);
+                    isValid = converter.IsValid(userInput);
+                }
 
-        static string GetUserInput(string message, Type allowedType, params string[] allowedValues)
-        {
-            string userInput = null;
-            var converter = TypeDescriptor.GetConverter(allowedType);            
+                if(userInputCriteria.Values.Length > 0 && !isValid) 
+                {
+                    isValid = Array.IndexOf(userInputCriteria.Values, userInput) != -1;
+                }
 
-            // not valid && index == -1
-            // 
-
-            //true -- true
-            while((userInput != null && !converter.IsValid(userInput)) 
-                && Array.IndexOf(allowedValues, userInput) == -1) 
-            {
-                Console.WriteLine(message);
-                userInput = Console.ReadLine();
-            }
+            } while(!isValid);
 
             return userInput;
         }

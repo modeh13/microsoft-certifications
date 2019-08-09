@@ -15,8 +15,8 @@ namespace GradeBook.Classes
         }
 
         public override void AddGrade(double grade)
-        {
-            if(grade >= 0 && grade <= 100)
+        {            
+            if(grade >= 0.0 && grade <= 100.0)
             {
                 _grades.Add(grade);
 
@@ -24,6 +24,8 @@ namespace GradeBook.Classes
                 {
                     GradeAdded(this, new GradeBookEventArgs(grade));
                 }
+
+                return;
             }
 
             throw new ArgumentException($"Grade {grade} must be more greater or equal than zero and more less than one hundred.");

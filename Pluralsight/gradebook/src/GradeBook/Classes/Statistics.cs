@@ -43,8 +43,8 @@ namespace GradeBook.Classes
         {            
             Sum = 0.0;
             Count = 0;
-            High = double.MaxValue;
-            Low = double.MinValue;            
+            High = double.MinValue;
+            Low = double.MaxValue;            
         }
 
         public void Add(double number)
