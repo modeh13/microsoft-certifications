@@ -36,7 +36,7 @@ namespace GradeBook
                     break;
                 default:
                     BookType = BookType.InDisk;
-                    //_book = new InDiskBook("");
+                    _book = new InDiskBook(gradeBookName);
                     break;
             }
 
