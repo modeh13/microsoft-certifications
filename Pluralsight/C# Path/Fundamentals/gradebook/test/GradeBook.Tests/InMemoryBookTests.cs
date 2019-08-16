@@ -11,7 +11,7 @@ namespace Tests
         }
 
         [Test]
-        public void Create_New_Instance_Name()
+        public void Book_Instance_Should_Retrive_Name_Property()
         {
             var bookName = "German";
             var book = new InMemoryBook(bookName);
