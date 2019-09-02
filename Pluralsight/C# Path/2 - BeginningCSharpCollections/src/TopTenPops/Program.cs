@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using TopTenPops.Classes;
 
 namespace TopTenPops
@@ -42,7 +43,10 @@ namespace TopTenPops
             bool exists = countriesDictionary.TryGetValue("MUS", out Country musCountry);
 
             foreach(var country in countriesDictionary.Values)
-                Console.WriteLine(country.Name);            
+                Console.WriteLine(country.Name);   
+
+            // Working with LINQ
+            WorkingWithLINQ(allCountries);             
         }
 
         private static void PrintCountries(IEnumerable<Country> countries)
@@ -50,6 +54,21 @@ namespace TopTenPops
             foreach(var country in countries)
             {
                 Console.WriteLine($"{PopulationFormatter.FormatPopulation(country.Population).PadLeft(15)}: {country.Name}");
+            }
+        }
+
+        private static void WorkingWithLINQ(List<Country> countries)
+        {
+            // Take method
+            foreach(var country in countries.Take(10))
+            {
+                PrintCountries(countries);
+            }
+
+            // OrderBy method
+            foreach(var country in countries.OrderBy(x => x.Name))
+            {
+                PrintCountries(countries);
             }
         }
     }
