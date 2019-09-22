@@ -92,6 +92,7 @@ namespace StockAnalyzer
             // TimeSpan (Ticks: Nanoseconds)
             // It represents a time interval (1 day 23 hours 0 minutes)
             var timeSpan = new TimeSpan(60, 100, 200);
+            var timeSpanBroadCastTime = new TimeSpan(6, 0, 0);
 
             Console.WriteLine(timeSpan.Days);       // 2
             Console.WriteLine(timeSpan.Hours);      // 13
